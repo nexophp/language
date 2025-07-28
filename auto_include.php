@@ -15,6 +15,8 @@ $module_info = [
 	'author' => 'sunkangchina'
 ];
 
+Menu::setGroup('admin');
+
 /**
  * 添加应用菜单 
  */
@@ -37,8 +39,8 @@ add_action('admin.setting.form', function () {
 	<div class="row g-3">
 		<div class="col-md-6">
 			<label  class="form-label">
-				<a href="https://niutrans.com/" class="link" target="_blank"><?= lang('小牛翻译') ?> </a>
-				使用 【文档 API】API-KEY
+				<a href="https://niutrans.com/" class="link" target="_blank"><?= lang('小牛翻译') ?> API-KEY </a>
+			 
 			</label>
 			<input v-model="form.niutrans_apikey" class="form-control" placeholder="API-KEY">
 		</div>
@@ -58,10 +60,10 @@ add_action('admin.setting.form', function () {
 </div>
  
 <?php
-});
+},500);
 
 add_action("lang", function ($data) {
-	if(!is_admin()){
+	if(!is_admin() || !is_local()){
 		return;
 	}
 	$name = $data['name'];
@@ -77,7 +79,7 @@ add_action("lang", function ($data) {
 	if (!$content || !is_array($content)) {
 		$content = [];
 	} 
-	if ($lang != 'zh-cn' && !$content[$name]) { 
+	if ($lang && $lang != 'zh-cn' && !$content[$name]) { 
 		$str = Niutrans::translate($name, 'zh-cn', $lang);
 		if ($str) {
 			$content[$name] = ucfirst($str);

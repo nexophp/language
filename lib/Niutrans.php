@@ -4,6 +4,9 @@
  * 小牛翻译
  * 购买，有免费额度
  * https://niutrans.com/documents/contents/trans_text#accessMode
+ * @author sunkangchina <68103403@qq.com>
+ * @license MIT <https://mit-license.org/>
+ * @date 2025
  */
 
 namespace modules\language\lib;
@@ -22,6 +25,9 @@ class Niutrans
     {
         if (strpos($Source, 'zh') !== false) {
             $Source = 'zh';
+        }
+        if(!get_config('niutrans_apikey')){
+            return;
         }
         $cache_key = "niutrans_translate:".md5($SourceText.$Source.$Target);
         $data = cache($cache_key);

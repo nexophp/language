@@ -100,7 +100,7 @@ $vue->method("saveLangContent()", "
                             <!-- 保存按钮 -->
                             <div class="text-center mt-3">
                                 <button class="btn btn-primary" @click="saveLangContent()" :disabled="!isModified">
-                                    <i class="bi bi-save"></i> <?= lang('保存修改') ?>
+                                    <?= lang('保存修改') ?>
                                 </button>
                             </div>
                         </div>
